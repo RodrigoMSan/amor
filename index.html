@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Surpresa</title>
+  <style>
+    body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: url('fundo2.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  overflow-x: hidden; /* bloqueia scroll horizontal */
+  overflow-y: auto;   /* permite scroll vertical */
+  text-align: center;
+    }
+    body::before {
+    content: "";
+     position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5); /* escurece 50% */
+    z-index: -1;
+    }
+
+    /* --- Tela inicial --- */
+    #inicio {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .presente {
+      width: 150px;
+      height: 150px;
+      background: url('presente.png') center/cover no-repeat;
+      animation: bounce 1s infinite;
+      cursor: pointer;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-20px); }
+      60% { transform: translateY(-10px); }
+    }
+
+    /* --- Conteúdo da surpresa --- */
+    #conteudo {
+      display: none;
+      padding: 20px;
+    }
+
+    h1 {
+      margin-top: 20px;
+      font-size: 2rem;
+    }
+
+    /* --- Contador --- */
+    #contador {
+      font-size: 1.5rem;
+      margin: 20px 0;
+    }
+
+    /* --- Carrossel --- */
+    .carrossel {
+      position: relative;
+      max-width: 400px;
+      margin: 0 auto;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+    }
+
+    .slides img {
+      width: 100%;
+      border-radius: 15px;
+    }
+
+    .navegacao {
+      position: absolute;
+      top: 50%;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      transform: translateY(-50%);
+    }
+
+    .navegacao button {
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      padding: 5px 10px;
+      border-radius: 50%;
+    }
+
+    /* --- Texto romântico --- */
+    .texto-romantico {
+      margin-top: 30px;
+      font-size: 1.3rem;
+      line-height: 1.6;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 20px;
+      background: rgba(255,255,255,0.15);
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    /* --- Corações caindo --- */
+    .coracao {
+      position: fixed;
+      top: -10px;
+      color: rgba(255, 0, 100, 0.7);
+      font-size: 24px;
+      animation: cair 5s linear infinite;
+    }
+
+    @keyframes cair {
+      0% { transform: translateY(-10px) rotate(0deg); }
+      100% { transform: translateY(110vh) rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Tela inicial -->
+  <div id="inicio">
+    <div class="presente" onclick="abrirPresente()"></div>
+  </div>
+
+  <!-- Conteúdo após abrir -->
+  <div id="conteudo">
+    <h1>Desde que estamos juntos se passaram:</h1>
+    <div id="contador"></div>
+
+    <div class="carrossel">
+      <div class="slides" id="slides">
+        <img src="foto1.jpg" alt="Foto 1">
+        <img src="foto2.jpg" alt="Foto 2">
+        <img src="foto3.jpg" alt="Foto 3">
+        <img src="foto4.jpg" alt="Foto 4">
+        <img src="foto5.jpg" alt="Foto 5">
+        <img src="foto6.jpg" alt="Foto 6">
+        <img src="foto7.jpg" alt="Foto 7">
+        <img src="foto8.jpg" alt="Foto 8">
+        <img src="foto9.jpg" alt="Foto 9">
+        <img src="foto10.jpg" alt="Foto 10">
+        <img src="foto11.jpg" alt="Foto 11">
+        <img src="foto12.jpg" alt="Foto 12">
+        <img src="foto13.jpg" alt="Foto 13">
+        <img src="foto14.jpg" alt="Foto 14">
+        <img src="foto15.jpg" alt="Foto 15">
+      </div>
+      <div class="navegacao">
+        <button onclick="mudarSlide(-1)">‹</button>
+        <button onclick="mudarSlide(1)">›</button>
+      </div>
+    </div>
+
+    <!-- Texto romântico -->
+    <div class="texto-romantico">
+      <p>
+    Desde o dia em que nos conhecemos, eu soube que queria você para o resto da minha vida.  
+    Foi difícil, mas finalmente te conquistei, e cada momento ao seu lado se torna cada vez mais especial.  
+    <br><br>
+    Quero que me acompanhe por toda a vida, para conquistarmos nossos sonhos juntos.  
+    Se você soubesse o quanto te amo, entenderia que eu faria qualquer coisa só para ver o seu lindo sorriso.  
+    <br><br>
+    Os melhores momentos da minha vida estão guardados comigo — desde o dia em que assistimos filmes juntos pelo celular até os dias em que fomos ao cinema de verdade.  
+    <br><br>
+    Passamos por tanta coisa juntos, mas cada segundo valeu a pena,  
+    porque hoje eu posso te chamar de <b>meu amor</b>. ❤️  
+      </p>
+    </div>
+  </div>
+
+  <!-- Música -->
+  <audio id="musica" src="chuva.mp3" loop></audio>
+
+  <script>
+    // Data do namoro (ano, mês-1, dia, hora, min, seg)
+    const startDate = new Date(2024, 8, 21, 20, 56, 0); 
+    // ⚠️ Setembro = 8 (porque janeiro = 0)
+
+    const contador = document.getElementById("contador");
+
+    function atualizarContador() {
+      const agora = new Date();
+
+      let anos = agora.getFullYear() - startDate.getFullYear();
+      let meses = agora.getMonth() - startDate.getMonth();
+      let dias = agora.getDate() - startDate.getDate();
+      let horas = agora.getHours() - startDate.getHours();
+      let minutos = agora.getMinutes() - startDate.getMinutes();
+      let segundos = agora.getSeconds() - startDate.getSeconds();
+
+      if (segundos < 0) {
+        segundos += 60;
+        minutos--;
+      }
+      if (minutos < 0) {
+        minutos += 60;
+        horas--;
+      }
+      if (horas < 0) {
+        horas += 24;
+        dias--;
+      }
+      if (dias < 0) {
+        meses--;
+        const ultimoDiaMesAnterior = new Date(agora.getFullYear(), agora.getMonth(), 0).getDate();
+        dias += ultimoDiaMesAnterior;
+      }
+      if (meses < 0) {
+        anos--;
+        meses += 12;
+      }
+
+      contador.innerHTML = `
+        <p><b>${anos}</b> anos | <b>${meses}</b> meses | <b>${dias}</b> dias</p>
+        <p><b>${horas}</b>h : <b>${minutos}</b>m : <b>${segundos}</b>s</p>
+      `;
+    }
+
+    atualizarContador();
+    setInterval(atualizarContador, 1000);
+
+    // Função ao abrir o presente
+    function abrirPresente() {
+      document.getElementById("inicio").style.display = "none";
+      document.getElementById("conteudo").style.display = "block";
+      document.getElementById("musica").play();
+      gerarCoracoes();
+    }
+
+    // Carrossel
+    let indice = 0;
+    function mudarSlide(direcao) {
+      const slides = document.getElementById("slides");
+      const total = slides.children.length;
+      indice = (indice + direcao + total) % total;
+      slides.style.transform = `translateX(${-indice * 100}%)`;
+    }
+
+    setInterval(() => mudarSlide(1), 4000);
+
+    // Corações caindo
+    function gerarCoracoes() {
+      setInterval(() => {
+        const coracao = document.createElement("div");
+        coracao.classList.add("coracao");
+        coracao.style.left = Math.random() * 100 + "vw";
+        coracao.style.animationDuration = (3 + Math.random() * 2) + "s";
+        coracao.innerHTML = "❤️";
+        document.body.appendChild(coracao);
+        setTimeout(() => coracao.remove(), 5000);
+      }, 500);
+    }
+  </script>
+</body>
+</html>
