@@ -82,14 +82,13 @@
     }
 
     .slides img {
-      flex: 0 0 100%;
-      width: 100%;
-      height: auto;
-      max-height: 80vh;       /* limita no celular */
-      object-fit: contain;    /* mostra a foto inteira */
-      border-radius: 15px;
-      background: #000;       /* fundo preto se sobrar espaço */
-    }
+  flex: 0 0 100%;
+  width: 100%;
+  aspect-ratio: 4 / 3;   /* formato câmera digital */
+  object-fit: cover;     /* preenche sem distorcer */
+  border-radius: 15px;
+  background: #000;
+}
 
     .navegacao {
       position: absolute;
@@ -266,3 +265,4 @@
   </script>
 </body>
 </html>
+
