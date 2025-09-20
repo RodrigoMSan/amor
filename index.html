@@ -5,15 +5,25 @@
   <title>Surpresa</title>
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background-image: url('./Fundo2.png');
-      background-size: cover;
-      color: #fff;
-      overflow-x: hidden;
-      overflow-y: auto;
-      text-align: center;
-    }
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('./Fundo2.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: scroll; /* <- funciona no celular */
+  color: #fff;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: center;
+}
+
+/* Mantém o efeito fixo no PC */
+@media (min-width: 768px) {
+  body {
+    background-attachment: fixed;
+  }
+}
     body::before {
       content: "";
       position: fixed;
@@ -268,6 +278,7 @@
   </script>
 </body>
 </html>
+
 
 
 
