@@ -84,11 +84,13 @@
     .slides img {
   flex: 0 0 100%;
   width: 100%;
-  aspect-ratio: 4 / 3;      /* ou 1/1 se quiser quadrado */
-  object-fit: cover;        /* mantém o preenchimento */
+  aspect-ratio: 4 / 3;     /* mantém 4:3 */
+  object-fit: contain;     /* mostra a foto inteira */
   border-radius: 15px;
-  background: transparent;        /* fundo preto */
+  background: transparent; /* deixa aparecer o fundo do site */
+  display: block;
 }
+
 
     .navegacao {
       position: absolute;
@@ -265,6 +267,7 @@
   </script>
 </body>
 </html>
+
 
 
 
